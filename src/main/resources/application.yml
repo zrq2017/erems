@@ -18,6 +18,15 @@ spring:
     view:
       suffix: .html
 
+#自定义属性
+#页面大小
+page:
+  size: 6
+#自定义拦截路径
+interceptor:
+  path:
+    exclude: index,login
+
 #定义应用路径
 server:
   servlet:

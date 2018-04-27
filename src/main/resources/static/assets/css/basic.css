@@ -11,7 +11,7 @@ body {
     width: 100%;
     background: #202020;
     padding: 0 0 0 260px;
-    margin: auto;
+    margin: auto;overflow-x: hidden;
 }
 
 #nav{

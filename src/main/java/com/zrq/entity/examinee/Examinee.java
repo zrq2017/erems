@@ -12,7 +12,6 @@ public class Examinee extends User {
     private String idnumber;
     private String eduback;
     private String adress;
-    private Integer type;
 
     public Examinee() {}
 
@@ -46,13 +45,5 @@ public class Examinee extends User {
 
     public void setAdress(String adress) {
         this.adress = adress;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
     }
 }

@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header::header('个人主页')"></div>
+<body>
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-head-line">考试列表</h1>
+                <h1 class="page-subhead-line">以下是所有社会考试列表，点击了解详情</h1>
+
+            </div>
+        </div>
+        <!-- /. ROW  -->
+        <th:block th:each="exam,examStat:${examPage.items}">
+            <div class="col-md-4 col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <th:block th:text="${exam.name}"></th:block>
+                    </div>
+                    <div class="panel-body">
+                        <p th:text="${exam.description}"></p>
+                    </div>
+                    <div class="panel-footer">
+                        Panel Footer
+                    </div>
+                </div>
+            </div>
+        </th:block>
+        <!-- /. ROW  -->
+    </div>
+    <!-- /. PAGE INNER  -->
+</body>
+</html>

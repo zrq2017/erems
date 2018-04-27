@@ -3,7 +3,9 @@ package com.zrq.controller;
 import com.zrq.entity.User;
 import com.zrq.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,13 +24,17 @@ import java.util.Map;
 @Controller
 @RequestMapping("/")
 public class UrlController {
+    //默认路径
+    @Value("${server.servlet.path}")
+    private String path;
+
     @Autowired
     private LoginService loginService;
     /**
      * 默认进入系统返回页面
      * @return
      */
-    @RequestMapping("/")
+    @RequestMapping(value = {"/","index"})
     public String index(){
         return "index";
     }
@@ -38,6 +44,12 @@ public class UrlController {
 
     @RequestMapping("/login")
     public String login(){return "login";}
+
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request){
+        request.getSession().removeAttribute("user");
+        return "redirect:"+path+"/index";
+    }
 
     @RequestMapping("/home")
     public String home(){return "home";}
@@ -54,10 +66,9 @@ public class UrlController {
         if(existUser!=null) {
             existUser.setPassword("");
             map.put("user",existUser);
-            return "home";
+            return "redirect:"+path+"/home";
         }
-        String msg="用户名或密码错误";
-        map.put("msg",msg);
+        map.put("msg","用户名或密码错误");
         return "login";
     }
 

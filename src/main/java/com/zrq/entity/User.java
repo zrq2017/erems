@@ -12,6 +12,7 @@ public class User {
     private String password;
     private String email;
     private Integer phone;
+    private Integer role;
 
     public User() {}
 
@@ -61,5 +62,13 @@ public class User {
 
     public void setPhone(Integer phone) {
         this.phone = phone;
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
     }
 }

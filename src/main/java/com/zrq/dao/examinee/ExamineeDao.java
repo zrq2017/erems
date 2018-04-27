@@ -13,10 +13,10 @@ import java.util.List;
  * Created by zrq on 2018-4-18.
  */
 @Repository
-public interface ExamineeDao {
-    @Select("select * from examinee")
+public interface ExamineeDao{
+    @Select("select * from user")
     public List<Examinee> findAll();
 
-    @Select("select * from examinee where username=#{username} and password=#{password}")
+    @Select("select * from user where username=#{username} and password=#{password}")
     public User findByUser(@Param("username") String username,@Param("password") String password);
 }
