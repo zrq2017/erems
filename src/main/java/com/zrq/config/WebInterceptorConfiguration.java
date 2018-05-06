@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by zrq on 2018-4-26.
  */
-@Configuration
+//@Configuration
 public class WebInterceptorConfiguration extends WebMvcConfigurationSupport {
     @Value("${interceptor.path.exclude}")
     private String[] excludePaths;
@@ -26,7 +26,7 @@ public class WebInterceptorConfiguration extends WebMvcConfigurationSupport {
     protected void addInterceptors(InterceptorRegistry registry) {
         //用户登录拦截器
         registry.addInterceptor(loginInterceptor).addPathPatterns(path+"/**")
-                .excludePathPatterns(excludePaths);
+                .excludePathPatterns("res/**");
         super.addInterceptors(registry);
     }
 }

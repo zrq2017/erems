@@ -1,7 +1,9 @@
 package com.zrq.dao;
 
 import com.zrq.entity.Exam;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -26,4 +28,10 @@ public interface ExamDao {
      */
     @Select("select count(*) from exam")
     public Integer count();
+
+    @Select("select * from exam where id=#{id}")
+    public Exam findById(Integer id);
+
+    @Insert("insert myexam(user_id,exam_id) values(#{userId},#{examId})")
+    public int insertExam(@Param("userId") Integer userId,@Param("examId") Integer examId);
 }

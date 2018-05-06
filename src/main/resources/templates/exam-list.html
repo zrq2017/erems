@@ -4,6 +4,8 @@
       xmlns:th="http://www.thymeleaf.org">
 <div th:replace="common/header::header('个人主页')"></div>
 <body>
+<div id="wrapper" class="row">
+    <div th:replace="common/header::nav"></div>
     <div id="page-inner">
         <div class="row">
             <div class="col-md-12">
@@ -23,7 +25,7 @@
                         <p th:text="${exam.description}"></p>
                     </div>
                     <div class="panel-footer">
-                        Panel Footer
+                        <a th:href="'/erems/exam/signup?id='+${exam.id}">点击参与报名</a>
                     </div>
                 </div>
             </div>
@@ -31,5 +33,9 @@
         <!-- /. ROW  -->
     </div>
     <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+<div th:replace="common/footer"></div>
 </body>
 </html>

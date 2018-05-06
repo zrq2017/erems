@@ -8,42 +8,5 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Examinee extends User {
-    private char sex;
-    private String idnumber;
-    private String eduback;
-    private String adress;
-
     public Examinee() {}
-
-    public char getSex() {
-        return sex;
-    }
-
-    public void setSex(char sex) {
-        this.sex = sex;
-    }
-
-    public String getIdnumber() {
-        return idnumber;
-    }
-
-    public void setIdnumber(String idnumber) {
-        this.idnumber = idnumber;
-    }
-
-    public String getEduback() {
-        return eduback;
-    }
-
-    public void setEduback(String eduback) {
-        this.eduback = eduback;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
-    }
 }

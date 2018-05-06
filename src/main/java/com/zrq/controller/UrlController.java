@@ -23,11 +23,7 @@ import java.util.Map;
 @SessionAttributes({"user"})
 @Controller
 @RequestMapping("/")
-public class UrlController {
-    //默认路径
-    @Value("${server.servlet.path}")
-    private String path;
-
+public class UrlController extends BaseController{
     @Autowired
     private LoginService loginService;
     /**

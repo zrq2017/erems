@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header::header('个人主页')"></div>
+<body>
+<div id="wrapper" class="row" th:object="${currentExam}">
+    <div th:replace="common/header::nav"></div>
+    <div id="page-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-head-line" th:text="*{name}"></h1>
+        </div>
+    </div>
+    <!-- /. ROW  -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    考试须知
+                </div>
+                <div class="panel-body">
+                    <th:block th:text="*{description}"></th:block>
+                </div>
+                <div class="panel-footer">
+                    <button class="btn btn-primary">
+                        <a th:href="'/erems/examinee/confirmInfo'" style="color:white;">了解，并参加</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /. ROW  -->
+</div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+<div th:replace="common/footer"></div>
+</body>
+</html>

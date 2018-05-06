@@ -32,4 +32,13 @@ public class ExamService {
         page.setItems(list);
         return page;
     }
+
+    /**
+     * 根据考试id查找考试信息
+     * @param id
+     * @return
+     */
+    public Exam findById(Integer id) {
+        return examDao.findById(id);
+    }
 }

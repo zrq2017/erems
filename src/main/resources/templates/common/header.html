@@ -9,13 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- BOOTSTRAP STYLES-->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="/erems/res/assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="/erems/res/assets/css/font-awesome.css" rel="stylesheet" />
     <!--CUSTOM BASIC STYLES-->
-    <link href="assets/css/basic.css" rel="stylesheet" />
+    <link href="/erems/res/assets/css/basic.css" rel="stylesheet" />
     <!--CUSTOM MAIN STYLES-->
-    <link href="assets/css/custom.css" rel="stylesheet" />
+    <link href="/erems/res/assets/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <script>
@@ -25,7 +25,7 @@
         function logout(){
             con=confirm("安全退出系统？");
             if(con==true) {
-                window.location.href = "logout";
+                window.location.href = "/erems/logout";
             }
         }
     </script>
@@ -34,14 +34,14 @@
 <div id="nav" th:fragment="nav">
     <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <a class="navbar-brand" href="assets/index">考试报名及考务管理系统</a>
+            <a class="navbar-brand" href="/erems/res/assets/index">考试报名及考务管理系统</a>
         </div>
 
         <div class="header-right">
 
-            <a href="assets/message-task" class="btn btn-info" title="New Message"><b>30 </b><i class="fa fa-envelope-o fa-2x"></i></a>
-            <a href="assets/message-task" class="btn btn-primary" title="New Task"><b>40 </b><i class="fa fa-bars fa-2x"></i></a>
-            <a href="assets/login" class="btn btn-danger" title="Logout"><i class="fa fa-exclamation-circle fa-2x"></i></a>
+            <a href="/erems/res/assets/message-task" class="btn btn-info" title="New Message"><b>30 </b><i class="fa fa-envelope-o fa-2x"></i></a>
+            <a href="/erems/res/assets/message-task" class="btn btn-primary" title="New Task"><b>40 </b><i class="fa fa-bars fa-2x"></i></a>
+            <a href="/erems/res/assets/login" class="btn btn-danger" title="Logout"><i class="fa fa-exclamation-circle fa-2x"></i></a>
 
         </div>
     </nav>
@@ -51,7 +51,7 @@
             <ul class="nav" id="main-menu">
                 <li>
                     <div class="user-img-div">
-                        <img src="assets/img/user.png" class="img-thumbnail" />
+                        <img src="/erems/res/assets/img/user.png" class="img-thumbnail" />
 
                         <div class="inner-text" th:object="${session.user}">
                             <span th:text="*{username}"></span>
@@ -61,49 +61,60 @@
                     </div>
 
                 </li>
+                <!--role:0管理员，1老师，2考生-->
+                <!--考生个人导航条-->
+                <th:block th:if="${session.user.role}==2">
                 <!-- /. 系统用户头 -->
                 <li>
                     <a href="home" class="active-menu"><i class="fa fa-dashboard "></i>主页</a>
                 </li>
                 <li>
-                    <a href="../admin#"><i class="fa fa-desktop "></i>社会考试信息<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-desktop "></i>社会考试信息<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a onclick="change('exam/list')"><i class="fa fa-toggle-on"></i>考试列表</a>
+                            <a href="/erems/exam/list"><i class="fa fa-toggle-on"></i>考试列表</a>
+                        </li>
+                        <!--<li>-->
+                            <!--<a onclick="change('admin/notification')"><i class="fa fa-bell "></i>Notifications</a>-->
+                        <!--</li>-->
+                    </ul>
+                </li>
+                <!--<li>-->
+                    <!--<a href="exam/signup"><i class="fa fa-anchor "></i>考试报名</a>-->
+                <!--</li>-->
+                <li>
+                    <a href="#"><i class="fa fa-yelp "></i>社会考试管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="/erems/examinee/examList?pay=0"><i class="fa fa-coffee"></i>待缴费</a>
                         </li>
                         <li>
-                            <a onclick="change('assets/notification')"><i class="fa fa-bell "></i>Notifications</a>
+                            <a href="/erems/examinee/examList?pay=1"><i class="fa fa-coffee"></i>已缴费</a>
+                        </li>
+                        <li>
+                            <a href="/erems/examinee/examList?pay=1&examed=0"><i class="fa fa-coffee"></i>已考</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="assets/gallery"><i class="fa fa-anchor "></i>考试报名</a>
+                    <a href="/erems/examinee/score"><i class="fa fa-flash "></i>成绩查询</a>
                 </li>
                 <li>
-                    <a href="../admin#"><i class="fa fa-yelp "></i>已报名考试<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="assets/invoice"><i class="fa fa-coffee"></i>未缴费</a>
-                        </li>
-                        <li>
-                            <a href="assets/invoice"><i class="fa fa-coffee"></i>已缴费</a>
-                        </li>
-                        <li>
-                            <a href="assets/invoice"><i class="fa fa-coffee"></i>已考</a>
-                        </li>
-                    </ul>
+                    <a href="/erems/examinee/myInfo"><i class="fa fa-bicycle "></i>个人信息 </a>
                 </li>
+                </th:block>
+                <!--老师个人导航条-->
+                <th:block th:if="${session.user.role}==1">
                 <li>
-                    <a href="assets/table"><i class="fa fa-flash "></i>成绩查询</a>
+                    <a href="/erems/manager/myInfo"><i class="fa fa-bicycle "></i>个人信息 </a>
                 </li>
+                </th:block>
+                <!--管理员个人导航条-->
+                <th:block th:if="${session.user.role}==0">
                 <li>
-                    <a href="../admin#"><i class="fa fa-bicycle "></i>个人信息 <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="assets/form"><i class="fa fa-desktop "></i>Basic </a>
-                        </li>
-                    </ul>
+                    <a href="/erems/admin/myInfo"><i class="fa fa-bicycle "></i>个人信息 </a>
                 </li>
+                </th:block>
                 <!--<li>-->
                     <!--<a href="../admin#"><i class="fa fa-sitemap "></i>Multilevel Link <span class="fa arrow"></span></a>-->
                     <!--<ul class="nav nav-second-level">-->

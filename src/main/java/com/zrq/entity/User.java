@@ -11,8 +11,12 @@ public class User {
     private String username;
     private String password;
     private String email;
-    private Integer phone;
+    private String phone;
     private Integer role;
+    private char sex;
+    private String idnumber;
+    private String eduback;
+    private String address;
 
     public User() {}
 
@@ -56,11 +60,11 @@ public class User {
         this.email = email;
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -70,5 +74,37 @@ public class User {
 
     public void setRole(Integer role) {
         this.role = role;
+    }
+
+    public char getSex() {
+        return sex;
+    }
+
+    public void setSex(char sex) {
+        this.sex = sex;
+    }
+
+    public String getIdnumber() {
+        return idnumber;
+    }
+
+    public void setIdnumber(String idnumber) {
+        this.idnumber = idnumber;
+    }
+
+    public String getEduback() {
+        return eduback;
+    }
+
+    public void setEduback(String eduback) {
+        this.eduback = eduback;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
