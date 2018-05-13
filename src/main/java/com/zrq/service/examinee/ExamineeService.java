@@ -38,6 +38,14 @@ public class ExamineeService {
     };
 
     /**
+     * 返回所有个人考试信息
+     * @return
+     */
+    public List<MyExam> findMyExam(){
+        return examineeDao.findMyExam();
+    }
+
+    /**
      * 根据考生及考试更改支付信息
      * @param userId
      * @param examId
@@ -88,4 +96,12 @@ public class ExamineeService {
        return examineeDao.updateUser(user);
     }
 
+    /**
+     * 根据考试id查询已报名考生信息
+     * @param examId
+     * @return
+     */
+    public List<MyExam> findMyExamByExamId(Integer examId){
+        return examineeDao.findMyExamByExamId(examId);
+    }
 }

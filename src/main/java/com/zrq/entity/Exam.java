@@ -1,5 +1,7 @@
 package com.zrq.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -10,6 +12,7 @@ public class Exam {
     private Integer id;
     private String name;
     private String description;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date time;
 
     public Exam() {}

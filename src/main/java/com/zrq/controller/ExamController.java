@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -34,6 +35,13 @@ public class ExamController extends BaseController{
 //        System.out.println("pageSize:"+examPage.getItems().get(1).getName());
         map.put("examPage",examPage);
         return "exam-list";
+    }
+
+    @RequestMapping("examList")
+    @ResponseBody
+    public List<Exam> examList(){
+        List<Exam> examList=examService.findAll();
+        return examList;
     }
 
     /**

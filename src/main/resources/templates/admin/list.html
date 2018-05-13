@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header::header('考试列表')"></div>
+<script>
+    Date.prototype.Format = function (fmt) { //将蓝括号的这段要放在调用时间的上面，
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+    function getExamList() {
+        $.ajax({
+            type: "post",
+            url: "/erems/exam/examList",    //url根据自己的项目实际定义
+            async: false,
+            dataType: "text",
+            error: function () {
+                alert("系统忙，请稍后再试！");
+                return false;
+            },
+            success: function (text) {
+                var expressExam = $("#examList");
+                var str = '';
+                var count = 1;
+                var data = eval("(" + text + ")");
+                expressExam.empty();
+                for (var o in data) {
+                    var desc = data[o].description;
+                    if (desc.length > 15) {//大于15个字符的隐藏处理
+                        desc = desc.substring(0, 15) + '...'
+                    }
+                    str += '<tr>'
+                        + '<td>' + count + '</td>'
+                        + '<td>' + data[o].name + '</td>'
+                        + '<td>' + desc + '</td>'
+                        + '<td>' +new Date(data[o].time).Format("yyyy-MM-dd hh:mm")  + '</td>'
+                        + '<td><a href="/erems/admin/exam?id=' + data[o].id + '" class="btn btn-primary">修改</a></td>'
+                        + '</tr>';
+                    count++;
+                }
+                expressExam.append(str);
+            }
+        });
+    }
+</script>
+<body onload="getExamList()">
+<div id="wrapper" class="row">
+    <div th:replace="common/header::nav"></div>
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-head-line">考试列表</h1>
+                <h1 class="page-subhead-line">以下是所有社会考试列表，点击了解详情</h1>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>名称</th>
+                            <th>描述</th>
+                            <th>时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="examList">
+                            <!--<tr>-->
+                                <!--<td>1</td>-->
+                                <!--<td>2018-5-4</td>-->
+                                <!--<td><a href="/erems/examinee/continuePay?id=">继续支付</a></td>-->
+                            <!--</tr>-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+<div th:replace="common/footer"></div>
+</body>
+</html>

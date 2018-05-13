@@ -102,4 +102,30 @@ public interface ExamineeDao{
             "eduback=#{eduback},address=#{address} where id=#{id}")
     public int updateUser(User user);
 
+    /**
+     * 根据考试id查询已报名考生信息
+     * @param examId
+     * @return
+     */
+    @Select("select * from myexam where exam_id=#{examId}")
+    @Results({
+            @Result(property="user",
+                    column = "user_id",
+                    one = @One(select = "com.zrq.dao.examinee.ExamineeDao.findById")
+            )
+    })
+    public List<MyExam> findMyExamByExamId(Integer examId);
+
+    /**
+     * 返回所有个人考试信息
+     * @return
+     */
+    @Select("select * from myexam")
+    @Results({
+            @Result(property="user",
+                    column = "user_id",
+                    one = @One(select = "com.zrq.dao.examinee.ExamineeDao.findById")
+            )
+    })
+    public List<MyExam> findMyExam();
 }

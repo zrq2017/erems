@@ -7,8 +7,10 @@ import com.zrq.entity.User;
 import com.zrq.entity.examinee.Examinee;
 import com.zrq.service.ExamService;
 import com.zrq.service.examinee.ExamineeService;
+import com.zrq.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -186,4 +188,17 @@ public class ExamineeController extends BaseController{
         return "score";
     }
 
+    /**
+     * 返回任何路径对应页面
+     * 如果未定义方法会默认使用该方法
+     * 若是定义了跳转方法会优先使用已定义的
+     * @param url
+     * @return
+     */
+    @RequestMapping("{url}")
+    public String viewDistribute(@PathVariable("url")String url){
+        url= StringUtil.humpToLine(url);//驼峰法与横线转换
+        System.out.println("MyPagedefault-all:"+url);
+        return url;
+    }
 }

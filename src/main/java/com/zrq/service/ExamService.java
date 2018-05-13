@@ -33,6 +33,10 @@ public class ExamService {
         return page;
     }
 
+    public List<Exam> findAll(){
+        return examDao.findAll();
+    }
+
     /**
      * 根据考试id查找考试信息
      * @param id
@@ -40,5 +44,23 @@ public class ExamService {
      */
     public Exam findById(Integer id) {
         return examDao.findById(id);
+    }
+
+    /**
+     * 根据id更新考试信息
+     * @param exam
+     * @return
+     */
+    public int updateExam(Exam exam) {
+        return examDao.updateExam(exam);
+    }
+
+    /**
+     * 新增考试信息
+     * @param exam
+     * @return
+     */
+    public int saveExam(Exam exam) {
+        return examDao.saveExam(exam);
     }
 }

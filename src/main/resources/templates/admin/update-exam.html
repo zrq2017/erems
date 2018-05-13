@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header::header('社会考试信息')"></div>
+<body>
+<div id="wrapper" class="row">
+    <div th:replace="common/header::nav"></div>
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        考试信息表
+                    </div>
+                    <div class="panel-body">
+                        <form action="/erems/admin/saveExam" method="post">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th style="width:40%;"></th>
+                                    <th>信息</th>
+                                </tr>
+                                </thead>
+                                <th:block th:if="${currentExam}">
+                                <tbody th:object="${currentExam}">
+                                <tr>
+                                    <td>名称</td>
+                                    <td>
+                                        <input type="text" id="name" name="name" class="required" placeholder="名称"
+                                               value="无" th:value="*{name}">
+                                        <input type="hidden" id="id" name="id" th:value="*{id}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>简介</td>
+                                    <td>
+                                        <input type="text" id="description" name="description" class="required" placeholder="简介"
+                                               value="无" th:value="*{description}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>考试时间</td>
+                                    <td>
+                                        <input type="text" id="time" name="time" class="required" placeholder="考试时间"
+                                               value="无" th:value="*{#dates.format(time, 'yyyy-MM-dd HH:mm')}">
+                                    </td>
+                                </tr>
+                                </tbody>
+                                </th:block>
+                                <th:block th:unless="${currentExam}">
+                                    <tbody>
+                                    <tr>
+                                        <td>名称</td>
+                                        <td>
+                                            <input type="text" id="name" name="name" class="required" placeholder="名称"
+                                                   value="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>简介</td>
+                                        <td>
+                                            <input type="text" id="description" name="description" class="required" placeholder="简介"
+                                                   value="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>考试时间</td>
+                                        <td>
+                                            <input type="text" id="time" name="time" class="required" placeholder="格式:2018-5-1 10:00:00"
+                                                   value="" alt="格式:yyyy-MM-dd HH:mm:ss">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </th:block>
+                            </table>
+                            <button type="submit" class="btn btn-primary">保存</button>
+                            <button class="btn btn-warning">
+                                <a th:href="'/erems/admin/a/list'" style="color:white;">取消</a>
+                            </button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+<div th:replace="common/footer"></div>
+</body>
+</html>

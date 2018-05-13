@@ -75,7 +75,7 @@
                                 </button>
                             </th:block>
                             <button class="btn btn-warning">
-                                <a th:href="'/erems/examinee/updateInfo'" style="color:white;">修改</a>
+                                <a th:href="'/erems/'+${session.user.role==0?'admin':(session.user.role==1?'manager':'examinee')}+'/updateInfo'" style="color:white;">修改</a>
                             </button>
                         </div>
                     </div>

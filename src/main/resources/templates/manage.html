@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header::header('考生信息录入')"></div>
+<body onload="getExam()">
+<div id="wrapper" class="row">
+    <div th:replace="common/header::nav"></div>
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <form role="form" action="/erems/manager/search" method="post">
+                    <div class="form-group">
+                        <label for="sname">姓名</label>
+                        <input type="text" name="sname" id="sname" />
+                        <label for="sexam">考试</label>
+                        <select id="sexam" name="sexam">
+                            <option value="">全部</option>
+                        </select>
+                        <!--动态获取考试列表-->
+                        <script>
+                            function getExam(){
+                                $.ajax({
+                                    type : "post",
+                                    url : "/erems/exam/examList",    //url根据自己的项目实际定义
+                                    async : false,
+                                    dataType : "text",
+                                    error : function() {
+                                        alert("系统忙，请稍后再试！");
+                                        return false;
+                                    },
+                                    success : function(text) {
+                                        var expressExam= $("#sexam");
+                                        var str = '<option value="">全部</option>';
+                                        var data = eval("("+text+")");
+                                        expressExam.empty();
+                                        for(var o in data) {
+                                            str += '<option value="'+data[o].id+'">'+data[o].name+'</option>';
+                                        }
+                                        expressExam.append(str);
+                                    }
+                                });
+                            }
+                        </script>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">查询</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        查询结果表
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <div th:text="${msg}" style="color: red;"></div>
+                            <div th:text="${msgSuccess}" style="color: green;"></div>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>姓名</th>
+                                    <th>用户名</th>
+                                    <th>性别</th>
+                                    <th>邮箱</th>
+                                    <th>电话</th>
+                                    <th>身份证号</th>
+                                    <th>教育背景</th>
+                                    <th>地址</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <th:block th:if="${#lists.size(examineeList)>0}" th:each="el:${examineeList}">
+                                <tr th:object="${el}">
+                                    <td th:text="*{name}">姓名</td>
+                                    <td th:text="*{username}">用户名</td>
+                                    <td th:text="*{sex}">性别</td>
+                                    <td th:text="*{email}">邮箱</td>
+                                    <td th:text="*{phone}">电话</td>
+                                    <td th:text="*{idnumber}">身份证号</td>
+                                    <td th:text="*{eduback}">教育背景</td>
+                                    <td th:text="*{address}">地址</td>
+                                    <td>
+                                        <button class="btn btn-primary"><a th:href="'/erems/manager/updateExaminee?id='+*{id}" style="color: white;">修改</a></button>
+                                    </td>
+                                </tr>
+                                </th:block>
+                                <th:block th:unless="${examineeList}">
+                                    <td colspan="8">未查询到相应结果！</td>
+                                </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+<div th:replace="common/footer"></div>
+</body>
+</html>

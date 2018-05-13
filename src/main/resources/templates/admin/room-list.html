@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header::header('考试列表')"></div>
+<script>
+    function getAreaList() {
+        $.ajax({
+            type: "post",
+            url: "/erems/admin/areaList",    //url根据自己的项目实际定义
+            async: false,
+            dataType: "text",
+            error: function () {
+                alert("系统忙，请稍后再试！");
+                return false;
+            },
+            success: function (text) {
+                var expressExam = $("#sarea");
+                var str = '<option value="">全部</option>';
+                var data = eval("(" + text + ")");
+                expressExam.empty();
+                for (var o in data) {
+                    str += '<option value="'+data[o].id+'">'+data[o].province+data[o].city+'</option>';
+                }
+                expressExam.append(str);
+            }
+        });
+    }
+</script>
+<body onload="getAreaList()">
+<div id="wrapper" class="row">
+    <div th:replace="common/header::nav"></div>
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <form role="form" action="/erems/admin/search" method="post">
+                    <div class="form-group">
+                        <label for="sname">考点名</label>
+                        <input type="text" name="sname" id="sname" />
+                        <label for="sarea">考点区域</label>
+                        <select id="sarea" name="sarea">
+                            <option value="">全部</option>
+                        </select>
+                        <!--动态获取考试列表-->
+                        <script>
+                            function getExam(){
+                                $.ajax({
+                                    type : "post",
+                                    url : "/erems/exam/examList",    //url根据自己的项目实际定义
+                                    async : false,
+                                    dataType : "text",
+                                    error : function() {
+                                        alert("系统忙，请稍后再试！");
+                                        return false;
+                                    },
+                                    success : function(text) {
+                                        var expressExam= $("#sexam");
+                                        var str = '<option value="">全部</option>';
+                                        var data = eval("("+text+")");
+                                        expressExam.empty();
+                                        for(var o in data) {
+                                            str += '<option value="'+data[o].id+'">'+data[o].name+'</option>';
+                                        }
+                                        expressExam.append(str);
+                                    }
+                                });
+                            }
+                        </script>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">查询</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>考点名</th>
+                            <th>编号</th>
+                            <th>考点大小</th>
+                            <th>归属区域</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="roomList" th:each="r,rstatus:${roomList}">
+                        <tr th:object="${r}">
+                            <td th:text="${rstatus.count}">1</td>
+                            <td th:text="*{name}">考点名</td>
+                            <td th:text="*{num}">编号</td>
+                            <td th:text="*{size}">考点大小</td>
+                            <td th:text="*{address.province+address.city}">归属区域</td>
+                            <td><a th:href="'/erems/admin/updateRoom?id='+*{id}">修改</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+<div th:replace="common/footer"></div>
+</body>
+</html>

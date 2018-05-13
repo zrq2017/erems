@@ -25,7 +25,7 @@
                             <th:block th:each="e:${myExam}">
                             <tr th:object="${e.exam}">
                                 <td th:text="*{name}">1</td>
-                                <td th:text="*{time}">2018-5-4</td>
+                                <td th:text="*{#dates.format(time, 'yyyy-MM-dd HH:mm')}">2018-5-4</td>
                                 <td><a th:href="'/erems/examinee/continuePay?id='+*{id}">继续支付</a></td>
                             </tr>
                             </th:block>
@@ -52,7 +52,7 @@
                             <th:block th:each="e:${myExam}">
                             <tr th:object="${e.exam}">
                                 <td th:text="*{name}">1</td>
-                                <td th:text="*{time}">2018-5-4</td>
+                                <td th:text="*{#dates.format(time, 'yyyy-MM-dd HH:mm')}">2018-5-4</td>
                                 <td>已支付</td>
                             </tr>
                             </th:block>
@@ -76,7 +76,7 @@
                             <th:block th:each="e:${myExam}">
                             <tr th:object="${e.exam}">
                                 <td th:text="*{name}">1</td>
-                                <td th:text="*{time}">2018-5-4</td>
+                                <td th:text="*{#dates.format(time, 'yyyy-MM-dd HH:mm')}">2018-5-4</td>
                                 <td th:text="${e.score}">100</td>
                                 <td>已考试</td>
                             </tr>
