@@ -6,7 +6,7 @@ spring:
   #定义数据源
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/erems
+    url: jdbc:mysql://127.0.0.1:3306/erems?allowMultiQueries=true
     username: root
     password: 123456
   thymeleaf:

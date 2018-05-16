@@ -12,6 +12,7 @@ public class Exam {
     private Integer id;
     private String name;
     private String description;
+    private Integer outed;//过期标志，0未过期，1过期
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date time;
 
@@ -39,6 +40,14 @@ public class Exam {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getOuted() {
+        return outed;
+    }
+
+    public void setOuted(Integer outed) {
+        this.outed = outed;
     }
 
     public Date getTime() {

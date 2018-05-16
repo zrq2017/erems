@@ -13,13 +13,24 @@ import java.util.List;
  */
 @Repository
 public interface ExamineeDao{
+    /**
+     * 查询所有不过期考试
+     * @return
+     */
     @Select("select * from user")
     public List<Examinee> findAll();
 
     @Select("select * from user where username=#{username} and password=#{password}")
+    @Results(id="addressOnly",value = {
+            @Result(property="address",
+                    column = "address",
+                    one = @One(select = "com.zrq.dao.AddressDao.findById")
+            )
+    })
     public User findByUser(@Param("username") String username,@Param("password") String password);
 
     @Select("select * from user where id=#{id}")
+    @ResultMap("addressOnly")
     public User findById(Integer id);
 
     /**
@@ -30,7 +41,7 @@ public interface ExamineeDao{
      * @return
      */
     @Select("select * from myexam where user_id=#{userId} and exam_id=#{examId}")
-    @Results({
+    @Results(id="user_exam",value ={
          @Result(property="user",
                  column = "user_id",
                  one = @One(select = "com.zrq.dao.examinee.ExamineeDao.findById")
@@ -38,7 +49,9 @@ public interface ExamineeDao{
         @Result(property="exam",
                 column = "exam_id",
                 one = @One(select = "com.zrq.dao.ExamDao.findById")
-        )
+        ),
+         @Result(property="examNum",column = "exam_num"),
+         @Result(property="roomNum",column = "room_num")
     })
     public MyExam findByUserAndExam(@Param("userId") Integer userId, @Param("examId") Integer examId);
 
@@ -49,11 +62,13 @@ public interface ExamineeDao{
      * @return
      */
     @Select("select * from myexam where user_id=#{userId} and pay=#{pay} and score<0")
-    @Results({
+    @Results(id="examOnly",value ={
             @Result(property="exam",
                     column = "exam_id",
                     one = @One(select = "com.zrq.dao.ExamDao.findById")
-            )
+            ),
+            @Result(property="examNum",column = "exam_num"),
+            @Result(property="roomNum",column = "room_num")
     })
     public List<MyExam> findByUserAndPay(@Param("userId") Integer userId,@Param("pay") Integer pay);
 
@@ -64,12 +79,7 @@ public interface ExamineeDao{
      * @return
      */
     @Select("select * from myexam where user_id=#{userId} and score>=0")
-    @Results({
-            @Result(property="exam",
-                    column = "exam_id",
-                    one = @One(select = "com.zrq.dao.ExamDao.findById")
-            )
-    })
+    @ResultMap("examOnly")
     public List<MyExam> findByUserAndExamed(@Param("userId") Integer userId);
 
     /**
@@ -79,12 +89,7 @@ public interface ExamineeDao{
      * @return
      */
     @Select("select * from myexam where user_id=#{userId} and exam_id=#{examId} and score>=0")
-    @Results({
-            @Result(property="exam",
-                    column = "exam_id",
-                    one = @One(select = "com.zrq.dao.ExamDao.findById")
-            )
-    })
+    @ResultMap("examOnly")
     public List<MyExam> findOneByUserAndExamed(@Param("userId") Integer userId,@Param("examId")  Integer examId);
 
     /**
@@ -99,7 +104,7 @@ public interface ExamineeDao{
      * @param user
      */
     @Update("update user set name=#{name},sex=#{sex},email=#{email},phone=#{phone},idnumber=#{idnumber}," +
-            "eduback=#{eduback},address=#{address} where id=#{id}")
+            "eduback=#{eduback},address=#{address.id} where id=#{id}")
     public int updateUser(User user);
 
     /**
@@ -108,11 +113,13 @@ public interface ExamineeDao{
      * @return
      */
     @Select("select * from myexam where exam_id=#{examId}")
-    @Results({
+    @Results(id="userOnly",value ={
             @Result(property="user",
                     column = "user_id",
                     one = @One(select = "com.zrq.dao.examinee.ExamineeDao.findById")
-            )
+            ),
+            @Result(property="examNum",column = "exam_num"),
+            @Result(property="roomNum",column = "room_num")
     })
     public List<MyExam> findMyExamByExamId(Integer examId);
 
@@ -121,11 +128,6 @@ public interface ExamineeDao{
      * @return
      */
     @Select("select * from myexam")
-    @Results({
-            @Result(property="user",
-                    column = "user_id",
-                    one = @One(select = "com.zrq.dao.examinee.ExamineeDao.findById")
-            )
-    })
+    @ResultMap("userOnly")
     public List<MyExam> findMyExam();
 }

@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<div th:replace="common/header::header('考试列表')"></div>
+<div th:replace="common/header::header('考号生成')"></div>
 <script>
     function getExam(){
         $.ajax({
@@ -39,6 +39,8 @@
                         <select id="examId" name="examId">
                             <option value="">全部</option>
                         </select>
+                        <input type="hidden" value="1" name="tag"/
+                        >
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">查询</button>
@@ -55,41 +57,37 @@
                         <th:block th:if="${currentExam}">
                             <tr>
                                 <th>当前考试</th>
-                                <th colspan="3" th:text="${currentExam.name}"></th>
+                                <th colspan="2" th:text="${currentExam.name}"></th>
+                                <th><a th:href="'/erems/admin/num?id='+${currentExam.id}">一键生成</a></th>
                             </tr>
                         </th:block>
                         <tr>
                             <th>序号</th>
                             <th>姓名</th>
                             <th>状态</th>
-                            <th>成绩</th>
+                            <th>考号</th>
                         </tr>
                         </thead>
-                        <th:block th:if="${#lists.size(examineeList)>0}">
+                        <th:block th:if="${examineeList!=null&&#lists.size(examineeList)>0}">
                             <tbody id="examineeList" th:each="e,estatus:${examineeList}">
-                            <tr th:object="${e}">
+                            <tr th:object="${e}" th:if="${e.pay==1&&e.score<0}">
                                 <td th:text="${estatus.count}">1</td>
                                 <td th:text="*{user.name}">姓名</td>
-                                <th:block th:if="*{pay==0}">
-                                    <td>未付款</td>
-                                    <td>0</td>
+                                <td>已付款</td>
+                                <th:block th:if="*{examNum}">
+                                <td th:text="*{examNum}">0</td>
                                 </th:block>
-                                <th:block th:if="*{pay==1}">
-                                    <td>已付款</td>
-                                    <th:block th:if="*{score>=0}">
-                                        <td th:text="*{score}">成绩</td>
-                                    </th:block>
-                                    <th:block th:if="*{score<0}">
-                                        <td>无</td>
-                                    </th:block>
+                                <th:block th:unless="*{examNum}">
+                                    <td>无</td>
+                                </th:block>
                                 </th:block>
                             </tr>
-                        </tbody>
+                            </tbody>
                         </th:block>
-                        <th:block th:unless="${#lists.size(examineeList)>0}">
+                        <th:block th:unless="${examineeList!=null&&#lists.size(examineeList)>0}">
                             <tbody id="examineeList">
                             <tr>
-                            <td colspan="4">未找到相应信息！</td>
+                                <td colspan="4">未找到相应信息！</td>
                             </tr>
                             </tbody>
                         </th:block>

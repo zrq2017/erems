@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header::header('成绩列表')"></div>
+<script>
+    function getExamList() {
+        $.ajax({
+            type: "post",
+            url: "/erems/exam/examList",    //url根据自己的项目实际定义
+            async: false,
+            dataType: "text",
+            error: function () {
+                alert("系统忙，请稍后再试！");
+                return false;
+            },
+            success: function (text) {
+                var expressExam = $("#sexam");
+                var str = '<option value="">全部</option>';
+                var data = eval("(" + text + ")");
+                expressExam.empty();
+                for (var o in data) {
+                    str += '<option value="'+data[o].id+'">'+data[o].name+'</option>';
+                }
+                expressExam.append(str);
+            }
+        });
+    }
+</script>
+<body onload="getExamList()">
+<div id="wrapper" class="row">
+    <div th:replace="common/header::nav"></div>
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <form role="form" action="/erems/admin/searchExam" method="post">
+                    <div class="form-group">
+                        <label for="sexam">考试名</label>
+                        <select id="sexam" name="sexam">
+                            <option value="">全部</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">查询</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+        <th:block th:if="${currentScore}">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <form action="/erems/admin/saveScore" method="post">
+                    <table class="table table-striped">
+                        <tbody th:object="${currentScore}">
+                            <tr>
+                                <td>
+                                    考号：<span th:text="*{examNum}"></span>
+                                    <input type="hidden" name="id" th:value="*{id}"/>
+                                </td>
+                                <td>
+                                    姓名：<span th:text="*{user.name}"></span>
+                                </td>
+                                <td>
+                                    成绩：<input type="text" name="score" th:value="*{score}"/>
+                                </td>
+                                <td><button type="submit" class="btn btn-primary">更新成绩</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </th:block>
+        <!-- /. ROW  -->
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <th:block th:if="${msgSuccess}">
+                            <tr>
+                                <td colspan="6" th:text="${msgSuccess}" style="color: green;"></td>
+                            </tr>
+                        </th:block>
+                        <th:block th:if="${msgError}">
+                            <tr>
+                                <td colspan="6" th:text="${msgError}" style="color: red;"></td>
+                            </tr>
+                        </th:block>
+                        <tr>
+                            <th>序号</th>
+                            <th>考试</th>
+                            <th>考号</th>
+                            <th>姓名</th>
+                            <th>成绩</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <th:block th:if="${#lists.size(scoreList)}>0">
+                        <tbody id="scoreList" th:each="s,sstatus:${scoreList}">
+                        <tr th:object="${s}">
+                            <td th:text="${sstatus.count}">1</td>
+                            <td th:text="*{exam.name}">考试</td>
+                            <td th:text="*{examNum}">考号</td>
+                            <td th:text="*{user.name}">姓名</td>
+                            <td th:unless="*{score<0}" th:text="*{score}">成绩</td>
+                            <td th:if="*{score<0}" style="color: blue;">空</td>
+                            <td>
+                                <th:block th:if="*{examNum}">
+                                    <th:block th:if="*{score<0}">
+                                        <a th:href="'/erems/admin/searchExam?id='+*{id}">给分</a>
+                                    </th:block>
+                                    <th:block th:unless="*{score<0}">
+                                        <a th:href="'/erems/admin/searchExam?id='+*{id}">更改</a>
+                                    </th:block>
+                                </th:block>
+                            </td>
+                        </tr>
+                        </tbody>
+                        </th:block>
+                        <th:block th:unless="${#lists.size(scoreList)}>0">
+                            <tbody>
+                            <tr>
+                                <td colspan="6">未找到相应信息！</td>
+                            </tr>
+                        </th:block>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+<div th:replace="common/footer"></div>
+</body>
+</html>

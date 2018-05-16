@@ -13,11 +13,18 @@ import java.util.List;
 @Repository
 public interface ExamDao {
     /**
-     * 查询所有社会考试信息
+     * 查询所有社会考试信息（未过期）
      * @return 社会考试列表
      */
-    @Select("select * from exam")
+    @Select("select * from exam where outed=0")
     public List<Exam> findAll();
+
+    /**
+     * 查询所有社会考试信息（过期）
+     * @return 社会考试列表
+     */
+    @Select("select * from exam where outed=1")
+    List<Exam> findAllOuted();
 
     /**
      * 查询考试列表条数
@@ -59,4 +66,14 @@ public interface ExamDao {
     @Insert("insert exam(name,description,time) values(#{name},#{description},#{time})")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     public int saveExam(Exam exam);
+
+    /**
+     * 设置考试是否过期
+     * @param id
+     * @param outed
+     * @return
+     */
+    @Update("update exam set outed=#{outed} where id=#{id}")
+    public int updateExamOuted(@Param("id")Integer id, @Param("outed")Integer outed);
+
 }

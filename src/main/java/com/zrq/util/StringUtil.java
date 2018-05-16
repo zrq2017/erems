@@ -34,6 +34,19 @@ public class StringUtil {
         matcher.appendTail(sb);
         return sb.toString();
     }
+
+
+    /**
+     * 转为对称的n位字符串
+     * @param str
+     * @return
+     */
+    public static String changeToString(Integer str,Integer len){
+        StringBuffer sb = new StringBuffer();
+        sb.append("00000"+str);
+        return sb.substring(sb.length()-len,sb.length());
+    }
+
 //    public static void main(String[] args) {
 //        String lineToHump = lineToHump("f_parent_no_leader");
 //        System.out.println(lineToHump);//fParentNoLeader

@@ -6,14 +6,14 @@ import com.zrq.entity.examinee.Examinee;
  * Created by zrq on 2018-5-2.
  */
 public class MyExam {
-    private  Integer id;
+    private Integer id;
     private User user;
     private Exam exam;
     private Integer score;
     private Integer time;
-    private Integer examNum;
-    private Integer roomNum;
-    private String address;
+    private String examNum;
+    private String roomNum;
+    private Address address;
     private Integer pay;
 
     public MyExam() {
@@ -59,27 +59,27 @@ public class MyExam {
         this.time = time;
     }
 
-    public Integer getExamNum() {
+    public String getExamNum() {
         return examNum;
     }
 
-    public void setExamNum(Integer examNum) {
+    public void setExamNum(String examNum) {
         this.examNum = examNum;
     }
 
-    public Integer getRoomNum() {
+    public String getRoomNum() {
         return roomNum;
     }
 
-    public void setRoomNum(Integer roomNum) {
+    public void setRoomNum(String roomNum) {
         this.roomNum = roomNum;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 

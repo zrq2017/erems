@@ -59,7 +59,7 @@
                                 </tr>
                                 <tr>
                                     <td>地址</td>
-                                    <td th:if="*{address}" th:text="*{address}">address</td>
+                                    <td th:if="*{address}" th:text="*{address.province+address.city}">address</td>
                                     <td th:unless="*{address}" th:text="*{address}">无</td>
                                 </tr>
                                 <!--有待确认考试信息时显示该项-->

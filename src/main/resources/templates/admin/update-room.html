@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header::header('考点信息')"></div>
+<script>
+    function getAreaList() {
+        $.ajax({
+            type: "post",
+            url: "/erems/admin/areaList",    //url根据自己的项目实际定义
+            async: false,
+            dataType: "text",
+            error: function () {
+                alert("系统忙，请稍后再试！");
+                return false;
+            },
+            success: function (text) {
+                var expressExam = $("#addressId");
+                var str = '';
+                var data = eval("(" + text + ")");
+                expressExam.empty();
+                for (var o in data) {
+                    str += '<option value="'+data[o].id+'">'+data[o].province+data[o].city+'</option>';
+                }
+                expressExam.append(str);
+            }
+        });
+    }
+</script>
+<body onload="getAreaList()">
+<div id="wrapper" class="row">
+    <div th:replace="common/header::nav"></div>
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        考点信息表
+                    </div>
+                    <div class="panel-body">
+                        <form action="/erems/admin/saveRoom" method="post">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th style="width:40%;"></th>
+                                    <th>信息</th>
+                                </tr>
+                                </thead>
+                                <th:block th:if="${currentRoom}">
+                                <tbody th:object="${currentRoom}">
+                                <tr>
+                                    <td>编号</td>
+                                    <td>
+                                        <input type="text" id="num" name="num" class="required" placeholder="编号:001"
+                                               value="" th:value="*{num}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>名称</td>
+                                    <td>
+                                        <input type="text" id="name" name="name" class="required" placeholder="名称"
+                                               value="无" th:value="*{name}">
+                                        <input type="hidden" id="id" name="id" th:value="*{id}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>考室数量</td>
+                                    <td>
+                                        <input type="text" id="size" name="size" class="required" placeholder="考室数量"
+                                               value="" th:value="*{size}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>归属区域</td>
+                                    <td>
+                                        <select id="addressId" name="address.id" th:value="*{address.id}"  th:text="*{address.province+address.city}">
+                                            <option>全部</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>详情</td>
+                                    <td>
+                                        <input type="text" id="detail" name="detail" class="required" placeholder="详情"
+                                               value="无" th:value="*{detail}">
+                                    </td>
+                                </tr>
+                                </tbody>
+                                </th:block>
+                                <th:block th:unless="${currentRoom}">
+                                    <tbody>
+                                    <tr>
+                                        <td>编号</td>
+                                        <td>
+                                            <input type="text" id="num" name="num" class="required" placeholder="编号:001"
+                                                   value="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>名称</td>
+                                        <td>
+                                            <input type="text" id="name" name="name" class="required" placeholder="名称"
+                                                   value="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>考室数量</td>
+                                        <td>
+                                            <input type="text" id="size" name="size" class="required" placeholder="考室数量"
+                                                   value="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>归属区域</td>
+                                        <td>
+                                            <select id="addressId" name="address.id">
+                                                <option value="">全部</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>详情</td>
+                                        <td>
+                                            <input type="text" id="detail" name="detail" class="required" placeholder="详情"
+                                                   value="">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </th:block>
+                            </table>
+                            <button type="submit" class="btn btn-primary">保存</button>
+                            <button class="btn btn-warning">
+                                <a th:href="'/erems/admin/search'" style="color:white;">取消</a>
+                            </button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+<div th:replace="common/footer"></div>
+</body>
+</html>

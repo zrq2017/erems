@@ -45,7 +45,8 @@
                         + '<td>' + data[o].name + '</td>'
                         + '<td>' + desc + '</td>'
                         + '<td>' +new Date(data[o].time).Format("yyyy-MM-dd hh:mm")  + '</td>'
-                        + '<td><a href="/erems/admin/exam?id=' + data[o].id + '" class="btn btn-primary">修改</a></td>'
+                        + '<td><a href="/erems/admin/exam?id=' + data[o].id + '" class="btn btn-primary">修改</a>'
+                        +'<a href="/erems/admin/outed?id=' + data[o].id + '" class="btn btn-primary">设为过期</a></td>'
                         + '</tr>';
                     count++;
                 }

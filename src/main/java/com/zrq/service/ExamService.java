@@ -63,4 +63,22 @@ public class ExamService {
     public int saveExam(Exam exam) {
         return examDao.saveExam(exam);
     }
+
+    /**
+     * 设置考试是否过期
+     * @param id
+     * @param outed
+     * @return
+     */
+    public int updateExamOuted(Integer id,Integer outed) {
+        return examDao.updateExamOuted(id,outed);
+    }
+
+    /**
+     * 发现所有过期考试
+     * @return
+     */
+    public List<Exam> findAllOuted() {
+        return examDao.findAllOuted();
+    }
 }

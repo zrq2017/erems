@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header::header('考试列表')"></div>
+<body>
+<div id="wrapper" class="row">
+    <div th:replace="common/header::nav"></div>
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-head-line">考试列表</h1>
+                <h1 class="page-subhead-line">以下是所有社会考试列表，点击了解详情</h1>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>名称</th>
+                            <th>描述</th>
+                            <th>时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="examList" th:if="${#lists.size(outList)>0}" th:each="o,ostatus:${outList}">
+                            <tr th:object="${o}">
+                                <td th:text="${ostatus.count}">1</td>
+                                <td th:text="*{name}">考试名</td>
+                                <td th:text="*{description}">描述</td>
+                                <td th:text="*{#dates.format(time, 'yyyy-MM-dd HH:mm')}">时间</td>
+                                <td>
+                                <a th:href="'/erems/admin/cancelOuted?id='+*{id}">取消过期</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+<div th:replace="common/footer"></div>
+</body>
+</html>

@@ -16,7 +16,7 @@ public class User {
     private char sex;
     private String idnumber;
     private String eduback;
-    private String address;
+    private Address address;
 
     public User() {}
 
@@ -100,11 +100,11 @@ public class User {
         this.eduback = eduback;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 }

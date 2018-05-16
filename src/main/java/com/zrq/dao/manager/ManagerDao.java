@@ -19,7 +19,7 @@ public interface ManagerDao {
      */
     @Insert("insert " +
             "user(name,username,password,sex,idnumber,eduback,address,email,phone,role) " +
-            "values(#{name},#{username},#{username},#{sex},#{idnumber},#{eduback},#{address},#{email},#{phone},2)")
+            "values(#{name},#{username},#{username},#{sex},#{idnumber},#{eduback},#{address.id},#{email},#{phone},2)")
     @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
     public int insertExaminee(User user);
 
@@ -55,6 +55,6 @@ public interface ManagerDao {
      * @param user
      */
     @Update("update user set name=#{name},sex=#{sex},email=#{email},phone=#{phone},idnumber=#{idnumber}," +
-            "eduback=#{eduback},address=#{address} where id=#{id}")
+            "eduback=#{eduback},address=#{address.id} where id=#{id}")
     public int updateUser(User user);
 }
