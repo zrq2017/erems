@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -108,7 +109,10 @@ public class ExamineeController extends BaseController{
         Integer userId=((User)request.getSession().getAttribute("user")).getId();
         if(exam!=null) {//当前考试存在则跳转相关信息，不存在则返回考试列表页面
             MyExam myExam=examineeService.payByUserAndExam(userId,exam.getId());
-            map.put("myExam",myExam);
+            List<MyExam> l=new ArrayList<MyExam>();
+            l.add(myExam);
+            map.put("myExam",l);
+//            System.out.println("pay-myexam:"+l.get(0).getPay());
             request.getSession().removeAttribute("currentExam");
             return "my-exam";
         }
@@ -146,7 +150,7 @@ public class ExamineeController extends BaseController{
                             @RequestParam(name = "examed",required = false) Integer examed){
         Integer userId=((User)request.getSession().getAttribute("user")).getId();
         if(pay==0||pay==1){
-            List<MyExam> myExam=null;
+            List<MyExam> myExam=(List<MyExam>)request.getAttribute("myExam");
             if(examed!=null){
                 myExam=examineeService.findByUserAndExamed(userId);
             }else {

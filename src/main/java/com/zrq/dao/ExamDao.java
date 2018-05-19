@@ -1,6 +1,7 @@
 package com.zrq.dao;
 
 import com.zrq.entity.Exam;
+import com.zrq.entity.Statistics;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -76,4 +77,10 @@ public interface ExamDao {
     @Update("update exam set outed=#{outed} where id=#{id}")
     public int updateExamOuted(@Param("id")Integer id, @Param("outed")Integer outed);
 
+    /**
+     * 统计未过期的考试报名人数数据
+     * @return
+     */
+    @Select("select count(*) count,b.id,b.name from myexam a join exam b on a.exam_id=b.id group by a.exam_id;")
+    public List<Statistics> findRegisterInfo();
 }

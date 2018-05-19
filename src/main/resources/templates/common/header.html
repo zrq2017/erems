@@ -57,6 +57,12 @@
 
                         <div class="inner-text" th:object="${session.user}">
                             <span th:text="*{username}"></span>
+                            <br />用户角色：
+                            <th:block th:switch="*{role}">
+                                <span th:case="0">管理员</span>
+                                <span th:case="1">考务人员</span>
+                                <span th:case="2">考生</span>
+                             </th:block>
                             <br />
                             <small onclick="logout()">注销</small>
                         </div>

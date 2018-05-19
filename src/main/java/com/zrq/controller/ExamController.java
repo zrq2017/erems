@@ -1,6 +1,7 @@
 package com.zrq.controller;
 
 import com.zrq.entity.Exam;
+import com.zrq.entity.Statistics;
 import com.zrq.service.ExamService;
 import com.zrq.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,14 @@ public class ExamController extends BaseController{
     public List<Exam> examList(){
         List<Exam> examList=examService.findAll();
         return examList;
+    }
+
+    @RequestMapping("registInfo")
+    @ResponseBody
+    public List<Statistics> registInfo(){
+        //用exam的描述字段存储报名人数数据
+        List<Statistics> statisticsList=examService.findRegisterInfo();
+        return statisticsList;
     }
 
     /**

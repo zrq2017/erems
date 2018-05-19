@@ -3,6 +3,7 @@ package com.zrq.service;
 import com.github.pagehelper.PageHelper;
 import com.zrq.dao.ExamDao;
 import com.zrq.entity.Exam;
+import com.zrq.entity.Statistics;
 import com.zrq.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,5 +81,13 @@ public class ExamService {
      */
     public List<Exam> findAllOuted() {
         return examDao.findAllOuted();
+    }
+
+    /**
+     * 统计未过期的考试报名人数数据
+     * @return
+     */
+    public List<Statistics> findRegisterInfo() {
+        return examDao.findRegisterInfo();
     }
 }
