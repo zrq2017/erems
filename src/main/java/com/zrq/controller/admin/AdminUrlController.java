@@ -1,9 +1,6 @@
 package com.zrq.controller.admin;
 
-import com.zrq.entity.Address;
-import com.zrq.entity.Exam;
-import com.zrq.entity.MyExam;
-import com.zrq.entity.Room;
+import com.zrq.entity.*;
 import com.zrq.service.ExamService;
 import com.zrq.service.admin.AdminService;
 import com.zrq.service.examinee.ExamineeService;
@@ -33,6 +30,25 @@ public class AdminUrlController {
 
     @RequestMapping(value = {"","index"})
     public String index(){return "home";}
+
+    @RequestMapping("deleteUser")
+    public String deleteUser(Map<String,Object> map,User user){
+        Integer i=adminService.deleteUser(user);
+        return user(map,user);
+    }
+
+    @RequestMapping("saveUser")
+    public String saveUser(Map<String,Object> map,User user){
+        Integer i=adminService.saveUser(user);
+        return user(map,user);
+    }
+
+    @RequestMapping("user")
+    public String user(Map<String,Object> map,User user){
+        List<User> userList=adminService.findUser(user);
+        map.put("userList",userList);
+        return "admin/user-list";
+    }
 
     @RequestMapping("num")
     public String num(@RequestParam("id")Integer id){

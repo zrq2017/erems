@@ -4,6 +4,7 @@ import com.zrq.dao.admin.AdminDao;
 import com.zrq.entity.Address;
 import com.zrq.entity.MyExam;
 import com.zrq.entity.Room;
+import com.zrq.entity.User;
 import com.zrq.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -173,5 +174,33 @@ public class AdminService {
         }
         int x=adminDao.batchCreateExamNum(e);
         return x;
+    }
+
+
+    /**
+     * 查找用户列表
+     * @param user
+     * @return
+     */
+    public List<User> findUser(User user) {
+        return adminDao.findUser(user);
+    }
+
+    /**
+     * 生成新用户
+     * @param user
+     * @return
+     */
+    public Integer saveUser(User user) {
+        return adminDao.saveUser(user);
+    }
+
+    /**
+     * 删除用户
+     * @param user
+     * @return
+     */
+    public Integer deleteUser(User user) {
+        return adminDao.deleteUser(user);
     }
 }

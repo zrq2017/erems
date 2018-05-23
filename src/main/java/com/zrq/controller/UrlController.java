@@ -41,6 +41,9 @@ public class UrlController extends BaseController{
     @RequestMapping("/login")
     public String login(){return "login";}
 
+    @RequestMapping("/regist")
+    public String regist(){return "regist";}
+
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request){
         request.getSession().removeAttribute("user");
@@ -65,6 +68,21 @@ public class UrlController extends BaseController{
             return "redirect:"+path+"/home";
         }
         map.put("msg","用户名或密码错误");
+        return "login";
+    }
+
+    /**
+     * 考生注册
+     * @param user
+     * @param map
+     * @return
+     */
+    @RequestMapping("register")
+    public String register(User user,Map<String,Object> map){
+        Integer i=loginService.registUser(user);
+        if(i==0){
+            map.put("msg","用户名信息输入错误！");
+        }
         return "login";
     }
 

@@ -16,4 +16,8 @@ public class LoginService {
     public User findUser(User user) {
         return examineeDao.findByUser(user.getUsername(),user.getPassword());
     }
+
+    public Integer registUser(User user) {
+        return examineeDao.registUser(user);
+    }
 }

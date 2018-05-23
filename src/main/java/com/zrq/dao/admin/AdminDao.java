@@ -3,6 +3,7 @@ package com.zrq.dao.admin;
 import com.zrq.entity.Address;
 import com.zrq.entity.MyExam;
 import com.zrq.entity.Room;
+import com.zrq.entity.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -142,4 +143,19 @@ public interface AdminDao {
             "</foreach>" +
             "</script>")
     public int batchCreateExamNum(@Param("list") List<MyExam> e);
+
+    /**
+     * 根据角色查找用户信息列表
+     * @param user
+     * @return
+     */
+    @Select("select * from user where role=#{role}")
+    public List<User> findUser(User user);
+
+    @Insert("insert user(name,username,password,sex,idnumber,eduback,phone,role) " +
+            "values(#{name},#{username},#{username},#{sex},#{idnumber},#{eduback},#{phone},#{role})")
+    public Integer saveUser(User user);
+
+    @Delete("delete from user where id=#{id}")
+    public Integer deleteUser(User user);
 }

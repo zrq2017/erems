@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="common/header::header('考试列表')"></div>
+<script>
+    function showUser() {
+        $('#uUser').show();
+        $('#addBtn').hide();
+    }
+</script>
+<body onload="getAreaList()">
+<div id="wrapper" class="row">
+    <div th:replace="common/header::nav"></div>
+    <div id="page-inner">
+        <div class="row" >
+            <div class="col-md-10 col-md-offset-1">
+                <button id="addBtn" class="btn btn-primary" onclick="showUser()">新增</button>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col-md-10 col-md-offset-1">
+                <div id="uUser" style="display: none">
+                    <form role="form" action="/erems/admin/saveUser" method="post">
+                        <div class="form-group">
+                            <label for="username">用户名：</label>
+                            <input type="text"  name="username" id="username" placeholder="请输入用户名">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">真实姓名：</label>
+                            <input type="text"  name="name" id="name" placeholder="请输入真实姓名">
+                        </div>
+                        <div class="form-group">
+                            <label for="sex">性别：</label>
+                            <select name="sex" id="sex" style=" height: 30px;">
+                                <option value="男" selected>男</option>
+                                <option value="女">女</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="idnumber">身份证号：</label>
+                            <input type="text"  name="idnumber" id="idnumber" placeholder="请输入身份证号">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">邮箱：</label>
+                            <input type="text"  name="email" id="email" placeholder="请输入邮箱信息">
+                        </div>
+                        <div class="form-group">
+                            <label for="role">角色：</label>
+                            <select name="role" id="role" style=" height: 30px;">
+                                <option value="1" selected>老师</option>
+                                <option value="0">管理员</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-default">提交</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col-md-4 col-md-offset-1">
+                <a href="/erems/admin/user?role=2">考生列表</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/erems/admin/user?role=1">教师列表</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/erems/admin/user?role=0">管理员列表</a>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col-md-10 col-md-offset-1">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>用户名</th>
+                        <th>真实姓名</th>
+                        <th>性别</th>
+                        <th>身份证号</th>
+                        <th>邮箱</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <th:block th:if="${#lists.size(userList)}>0">
+                    <tbody th:each="u,ustatus:${userList}">
+                        <tr th:object="${u}">
+                            <td th:text="${ustatus.count}">1</td>
+                            <td th:text="*{username}">用户名</td>
+                            <td th:text="*{name}">真实姓名</td>
+                            <td th:text="*{sex}">性别</td>
+                            <td th:text="*{idnumber}">身份证号</td>
+                            <td th:text="*{email}">邮箱</td>
+                            <td>
+                                <th:block th:if="*{role==0}">
+                                    无
+                                </th:block>
+                                <th:block th:unless="*{role==0}">
+                                    <a th:href="'/erems/admin/deleteUser?id='+*{id}+'&role='+*{role}" style="color: red;">删除</a>
+                                </th:block>
+                            </td>
+                        </tr>
+                    </tbody>
+                    </th:block>
+                    <th:block th:unless="${#lists.size(userList)}>0">
+                        <tbody>
+                        <tr>
+                            <td colspan="7">未找到相应信息！</td>
+                        </tr>
+                    </th:block>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+<div th:replace="common/footer"></div>
+</body>
+</html>

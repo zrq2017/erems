@@ -130,4 +130,7 @@ public interface ExamineeDao{
     @Select("select * from myexam")
     @ResultMap("userOnly")
     public List<MyExam> findMyExam();
+
+    @Insert("insert user(username,password,phone,role) values(#{username},#{password},#{phone},2)")
+    public Integer registUser(User user);
 }
