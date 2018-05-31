@@ -3,6 +3,22 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <div th:replace="common/header::header('个人信息')"></div>
+<script>
+    function get_img(f) {
+        var rd = new FileReader();//创建文件读取对象
+        var files = f.files[0];//获取file组件中的文件
+        rd.readAsDataURL(files);文件读取装换为base64类型
+        rd.onloadend = function(e) {
+            //加载完毕之后获取结果赋值给img
+            document.getElementById("imageShow").src = this.result;
+            $("imageShow").show();
+        }
+    }
+    function  changeFile() {
+        $('#changeFile').show();
+        $('#cBtn').hide();
+    }
+</script>
 <body>
 <div id="wrapper" class="row">
     <div th:replace="common/header::nav"></div>
@@ -17,9 +33,30 @@
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead>
-                                <tr>
-                                    <th style="width:40%;"></th>
-                                    <th>信息</th>
+                                <tr th:if="${session.user.perimage==null || session.user.perimage==''}">
+                                    <th style="width:40%;">头像</th>
+                                    <th>
+                                        <form  class="form-inline" action="/erems/uploadUserPhoto" method="post" enctype="multipart/form-data">
+                                            <div class="form-group">
+                                            <input type="file" name="file" title=""/>
+                                                <img src="" id="imageShow" style="display: none"/>
+                                            <input type="submit" value="上传" class="btn btn-primary"/>
+                                            </div>
+                                        </form>
+                                    </th>
+                                </tr>
+                                <tr th:unless="${session.user.perimage==null || session.user.perimage==''}">
+                                    <th style="width:40%;">头像</th>
+                                    <th>
+                                        <img th:src="'/erems/show-image/'+${session.user.perimage}" alt="个人头像" style="width: 100px;"/>
+                                        <form  id="changeFile" class="form-inline" action="/erems/uploadUserPhoto" method="post" enctype="multipart/form-data" style="display: none">
+                                            <div class="form-group">
+                                                <input type="file" name="file" title=""/>
+                                                <input type="submit" value="上传" class="btn btn-primary"/>
+                                            </div>
+                                        </form>
+                                        <button id="cBtn" type="button" onclick="changeFile()">更改</button>
+                                    </th>
                                 </tr>
                                 </thead>
                                 <tbody th:object="${session.user}">

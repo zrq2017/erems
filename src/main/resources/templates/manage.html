@@ -84,7 +84,7 @@
                                     <td th:text="*{phone}">电话</td>
                                     <td th:text="*{idnumber}">身份证号</td>
                                     <td th:text="*{eduback}">教育背景</td>
-                                    <td th:text="*{address}">地址</td>
+                                    <td th:text="*{address.province+address.city}">地址</td>
                                     <td>
                                         <button class="btn btn-primary"><a th:href="'/erems/manager/updateExaminee?id='+*{id}" style="color: white;">修改</a></button>
                                     </td>

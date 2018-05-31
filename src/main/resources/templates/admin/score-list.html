@@ -100,7 +100,7 @@
                         </thead>
                         <th:block th:if="${#lists.size(scoreList)}>0">
                         <tbody id="scoreList" th:each="s,sstatus:${scoreList}">
-                        <tr th:object="${s}">
+                        <tr th:object="${s}" th:if="${s.examNum!=null}">
                             <td th:text="${sstatus.count}">1</td>
                             <td th:text="*{exam.name}">考试</td>
                             <td th:text="*{examNum}">考号</td>

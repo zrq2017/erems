@@ -23,7 +23,7 @@ public class ExamService {
      * @return
      */
     public PageBean<Exam> findByPage(int currentPage, int pageSize){
-        PageHelper.startPage(currentPage,pageSize);
+//        PageHelper.startPage(currentPage,pageSize);
         List<Exam> list=examDao.findAll();
 //        for (Exam e:list) {
 //            System.out.println("exam"+e.getId()+e.getName());

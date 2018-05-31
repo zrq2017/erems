@@ -133,4 +133,7 @@ public interface ExamineeDao{
 
     @Insert("insert user(username,password,phone,role) values(#{username},#{password},#{phone},2)")
     public Integer registUser(User user);
+
+    @Update("update user set perimage=#{fileName} where id=#{id}")
+    public Integer saveUserImage(@Param("fileName") String fileName,@Param("id")Integer id);
 }

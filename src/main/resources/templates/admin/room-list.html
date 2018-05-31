@@ -16,11 +16,15 @@
             },
             success: function (text) {
                 var expressExam = $("#sarea");
-                var str = '<option value="">全部</option>';
+                var str = '';
                 var data = eval("(" + text + ")");
                 expressExam.empty();
                 for (var o in data) {
-                    str += '<option value="'+data[o].id+'">'+data[o].province+data[o].city+'</option>';
+                    if(data[o].id==0) {
+                        str += '<option value="">' + data[o].province + data[o].city + '</option>';
+                    }else {
+                        str += '<option value="' + data[o].id + '">' + data[o].province + data[o].city + '</option>';
+                    }
                 }
                 expressExam.append(str);
             }

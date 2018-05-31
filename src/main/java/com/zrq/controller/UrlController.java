@@ -2,15 +2,17 @@ package com.zrq.controller;
 
 import com.zrq.entity.User;
 import com.zrq.service.LoginService;
+import com.zrq.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -26,6 +28,14 @@ import java.util.Map;
 public class UrlController extends BaseController{
     @Autowired
     private LoginService loginService;
+
+    private final ResourceLoader resourceLoader;
+
+    //初始化资源加载器
+    @Autowired
+    public UrlController(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
     /**
      * 默认进入系统返回页面
      * @return
@@ -64,6 +74,10 @@ public class UrlController extends BaseController{
         User existUser=loginService.findUser(user);
         if(existUser!=null) {
             existUser.setPassword("");
+//            if(existUser.getPerimage()!=null) {
+//                String tempPath = filePath+existUser.getPerimage();
+//                existUser.setPerimage(tempPath);
+//            }
             map.put("user",existUser);
             return "redirect:"+path+"/home";
         }
@@ -86,6 +100,44 @@ public class UrlController extends BaseController{
         return "login";
     }
 
+    /**
+     * 上传图片
+     * @param file
+     * @param request
+     * @return
+     */
+    @RequestMapping("uploadUserPhoto")
+    public String uploadUserPhoto(@RequestParam("file")MultipartFile file,HttpServletRequest request) {
+        String contentType = file.getContentType();
+        String fileName = file.getOriginalFilename();
+        System.out.println("fileName-->" + fileName);
+        System.out.println("getContentType-->" + contentType);
+//        String filePath = request.getSession().getServletContext().getRealPath("/");
+        try {
+            System.out.println("getRealPath-->" + filePath+fileName);
+            FileUtil.uploadFile(file.getBytes(), filePath, fileName);
+            Integer id=((User)request.getSession().getAttribute("user")).getId();
+            Integer x=loginService.saveUserImage(fileName,id);
+            if(x>0){
+                User newUser=loginService.findUserById(id);
+                request.getSession().setAttribute("user",newUser);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        //返回json
+        return "my-info";
+    }
+    @RequestMapping(method = RequestMethod.GET, value = "show-image/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<?> getFile(@PathVariable String filename) {
+
+        try {
+            return ResponseEntity.ok(resourceLoader.getResource("file:" + filePath+filename));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
     /**
      * 后台向前端传值方式一
      *

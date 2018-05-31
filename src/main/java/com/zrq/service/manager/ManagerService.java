@@ -29,11 +29,11 @@ public class ManagerService {
     public List<User> searchByNameAndExam(String name, Integer examId) {
         List<User> l=null;
         l=managerDao.searchByNameAndExam(name,examId);
-        if(l!=null){//设置用户密码为空
-            for (User u:l){
-                u.setPassword("");
-            }
-        }
+//        if(l!=null){//设置用户密码为空
+//            for (User u:l){
+//                u.setPassword("");
+//            }
+//        }
         return l;
     }
     /**
@@ -54,5 +54,14 @@ public class ManagerService {
      */
     public int updateUser(User user) {
         return managerDao.updateUser(user);
+    }
+
+    /**
+     * 根据id查找用户
+     * @param id
+     * @return
+     */
+    public User findUserById(Integer id){
+        return managerDao.findUserById(id);
     }
 }

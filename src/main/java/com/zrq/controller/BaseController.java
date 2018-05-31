@@ -9,5 +9,7 @@ public class BaseController {
     //默认路径
     @Value("${server.servlet.path}")
     protected String path;
+    @Value("${image.path}")
+    protected String filePath;
 
 }

@@ -92,6 +92,7 @@ public class ExamineeController extends BaseController{
         user.setId(((User)request.getSession().getAttribute("user")).getId());
         if(examineeService.updateUser(user)>0){
             User newUser=examineeService.findUserById(user.getId());
+//            request.getSession().removeAttribute("user");
             request.getSession().setAttribute("user",newUser);
         }
         return "my-info";

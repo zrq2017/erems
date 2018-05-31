@@ -31,7 +31,9 @@ page:
 interceptor:
   path:
     exclude: res/**,index,login
-
+#图片上传路径
+image:
+  path: E:\Code\Java\erems\src\main\resources\static\img\
 ---
 #开发环境配置
 spring:

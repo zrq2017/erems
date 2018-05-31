@@ -30,7 +30,9 @@ public interface ManagerDao {
      * @return
      */
     @Select("<script>"+
-            "select * from user as u join myexam as me on u.id=me.user_id where 1=1" +
+            "select " +
+            "distinct u.id as id,u.name as name,u.username as username,u.email as email,u.phone as phone,u.role as role,u.sex as sex,u.idnumber as idnumber,u.eduback as eduback,u.address as address" +
+            " from user as u join myexam as me on u.id=me.user_id where 1=1" +
             "<if test='name!=null and name != \"\"'>" +
             "and u.name like CONCAT('%',#{name},'%')" +
             "</if>" +
@@ -38,7 +40,22 @@ public interface ManagerDao {
             "and me.exam_id=#{examId}" +
             "</if>" +
             "</script>")
+    @Results(id="addressOnly",value = {
+            @Result(property="address",
+                    column = "address",
+                    one = @One(select = "com.zrq.dao.admin.AdminDao.findAreaById")
+            )
+    })
     public List<User> searchByNameAndExam(@Param("name") String name, @Param("examId") Integer examId);
+
+    /**
+     * 根据用户id查找某用户
+     * @param id
+     * @return
+     */
+    @Select("select * from user where id=#{id}")
+    @ResultMap("addressOnly")
+    public User findUserById(@Param("id") Integer id);
 
 
     /**

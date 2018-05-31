@@ -3,7 +3,60 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <div th:replace="common/header::header('考生信息录入')"></div>
-<body onload="getExam()">
+<script>
+//    <!--动态获取考试列表-->
+    function getExam(){
+        $.ajax({
+            type : "post",
+            url : "/erems/exam/examList",    //url根据自己的项目实际定义
+            async : false,
+            dataType : "text",
+            error : function() {
+                alert("系统忙，请稍后再试！");
+                return false;
+            },
+            success : function(text) {
+                var expressExam= $("#examId");
+                var str = '';
+                var data = eval("("+text+")");
+                expressExam.empty();
+                for(var o in data) {
+                    str += '<option value="'+data[o].id+'">'+data[o].name+'</option>';
+                }
+                expressExam.append(str);
+            }
+        });
+    }
+//获取地区
+    function getAreaList() {
+        $.ajax({
+            type: "post",
+            url: "/erems/admin/areaList",    //url根据自己的项目实际定义
+            async: false,
+            dataType: "text",
+            error: function () {
+                alert("系统忙，请稍后再试！");
+                return false;
+            },
+            success: function (text) {
+                var expressExam = $("#addressId");
+                var str = '';
+                var data = eval("(" + text + ")");
+                expressExam.empty();
+                for (var o in data) {
+                        str += '<option value="' + data[o].id + '">' + data[o].province + data[o].city + '</option>';
+                }
+                expressExam.append(str);
+            }
+        });
+    }
+
+    function loadf() {
+        getExam();
+        getAreaList();
+    }
+</script>
+<body onload="loadf()">
 <div id="wrapper" class="row">
     <div th:replace="common/header::nav"></div>
     <div id="page-inner">
@@ -80,8 +133,9 @@
                                     <tr>
                                         <td>地址</td>
                                         <td>
-                                            <input type="text" id="address" name="address" class="required" placeholder="地址"
-                                                   value="">
+                                            <select id="addressId" name="address.id">
+                                                <option>全部</option>
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr>
@@ -90,38 +144,13 @@
                                             <select id="examId" name="examId">
                                                 <option value="">全部</option>
                                             </select>
-                                            <!--动态获取考试列表-->
-                                            <script>
-                                                function getExam(){
-                                                    $.ajax({
-                                                        type : "post",
-                                                        url : "/erems/exam/examList",    //url根据自己的项目实际定义
-                                                        async : false,
-                                                        dataType : "text",
-                                                        error : function() {
-                                                            alert("系统忙，请稍后再试！");
-                                                            return false;
-                                                        },
-                                                        success : function(text) {
-                                                            var expressExam= $("#examId");
-                                                            var str = '';
-                                                            var data = eval("("+text+")");
-                                                            expressExam.empty();
-                                                            for(var o in data) {
-                                                                str += '<option value="'+data[o].id+'">'+data[o].name+'</option>';
-                                                            }
-                                                            expressExam.append(str);
-                                                        }
-                                                    });
-                                                }
-                                            </script>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
                                 <button type="submit" class="btn btn-primary">插入</button>
                                 <button class="btn btn-warning">
-                                    <a th:href="'/erems/manager/cancelInfo'" style="color:white;">取消</a>
+                                    <a href="javascript:history.go(-1)" style="color:white;">取消</a>
                                 </button>
                             </div>
                         </form>

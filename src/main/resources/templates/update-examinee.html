@@ -3,7 +3,37 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <div th:replace="common/header::header('考生信息更新')"></div>
-<body>
+<script>
+    function getAreaList() {
+        $.ajax({
+            type: "post",
+            url: "/erems/admin/areaList",    //url根据自己的项目实际定义
+            async: false,
+            dataType: "text",
+            error: function () {
+                alert("系统忙，请稍后再试！");
+                return false;
+            },
+            success: function (text) {
+                var expressExam = $("#addressId");
+                var str = '';
+                var data = eval("(" + text + ")");
+                var tid=expressExam.attr("value");
+                expressExam.empty();
+                console.log(tid)
+                for (var o in data) {
+                    if(tid==data[o].id) {
+                        str += '<option value="' + data[o].id + '" selected>' + data[o].province + data[o].city + '</option>';
+                    }else{
+                        str += '<option value="' + data[o].id + '">' + data[o].province + data[o].city + '</option>';
+                    }
+                }
+                expressExam.append(str);
+            }
+        });
+    }
+</script>
+<body onload="getAreaList()">
 <div id="wrapper" class="row">
     <div th:replace="common/header::nav"></div>
     <div id="page-inner">
@@ -76,8 +106,9 @@
                                 <tr>
                                     <td>地址</td>
                                     <td>
-                                        <input type="text" id="address" name="address" class="required" placeholder="地址"
-                                               value="无" th:value="*{address}">
+                                        <select id="addressId" name="address.id" th:value="*{address.id}"  th:text="*{address.province+address.city}">
+                                            <option>全部</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 </tbody>

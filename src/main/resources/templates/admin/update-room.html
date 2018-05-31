@@ -18,9 +18,15 @@
                 var expressExam = $("#addressId");
                 var str = '';
                 var data = eval("(" + text + ")");
+                var tid=expressExam.attr("value");
                 expressExam.empty();
+                console.log(tid)
                 for (var o in data) {
-                    str += '<option value="'+data[o].id+'">'+data[o].province+data[o].city+'</option>';
+                    if(tid==data[o].id) {
+                        str += '<option value="' + data[o].id + '" selected>' + data[o].province + data[o].city + '</option>';
+                    }else{
+                        str += '<option value="' + data[o].id + '">' + data[o].province + data[o].city + '</option>';
+                    }
                 }
                 expressExam.append(str);
             }

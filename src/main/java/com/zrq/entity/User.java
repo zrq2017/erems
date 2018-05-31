@@ -17,6 +17,7 @@ public class User {
     private String idnumber;
     private String eduback;
     private Address address;
+    private String perimage;
 
     public User() {}
 
@@ -106,5 +107,13 @@ public class User {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public String getPerimage() {
+        return perimage;
+    }
+
+    public void setPerimage(String perimage) {
+        this.perimage = perimage;
     }
 }

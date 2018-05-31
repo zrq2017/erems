@@ -1,6 +1,7 @@
 package com.zrq.controller.manager;
 
 import com.zrq.entity.User;
+import com.zrq.entity.examinee.Examinee;
 import com.zrq.service.manager.ManagerService;
 import com.zrq.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class ManagerController {
             List<User> examineeList=managerService.searchByNameAndExam(name,sexam);
             map.put("examineeList",examineeList);
         }
-        return "my-info";
+        return "manage";
     }
 
 
@@ -73,6 +74,17 @@ public class ManagerController {
         System.out.println("saveExaminee3:"+x);
         map.put("msgSuccess","添加考生信息成功");
         return "entry";
+    }
+
+    /**
+     * 添加考生信息并插入对应考生的考试项
+     * @return
+     */
+    @RequestMapping("updateExaminee")
+    public  String updateExaminee(HttpServletRequest request, User user, Map<String,Object> map){
+        User examinee=managerService.findUserById(user.getId());
+        map.put("examinee",examinee);
+        return viewDistribute("updateExaminee");
     }
 
     /**

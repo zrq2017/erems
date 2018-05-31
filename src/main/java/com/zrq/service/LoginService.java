@@ -20,4 +20,12 @@ public class LoginService {
     public Integer registUser(User user) {
         return examineeDao.registUser(user);
     }
+
+    public Integer saveUserImage(String fileName,Integer id) {
+        return examineeDao.saveUserImage(fileName,id);
+    }
+
+    public User findUserById(Integer id) {
+        return examineeDao.findById(id);
+    }
 }
