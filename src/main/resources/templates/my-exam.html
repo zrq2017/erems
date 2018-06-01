@@ -45,7 +45,9 @@
                             <tr>
                                 <th>考试名称</th>
                                 <th>考试时间</th>
+                                <th>准考证号</th>
                                 <th>状态</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -53,7 +55,12 @@
                             <tr th:object="${e.exam}">
                                 <td th:text="*{name}">1</td>
                                 <td th:text="*{#dates.format(time, 'yyyy-MM-dd HH:mm')}">2018-5-4</td>
-                                <td>已支付</td>
+                                <td th:text="${e.examNum}">100</td>
+                                <td>
+                                    <th:block  th:if="${e.examNum!=null&&e.examNum!=''}">准考证已生成</th:block>
+                                    <th:block  th:unless="${e.examNum!=null&&e.examNum!=''}">等待准考证生成</th:block>
+                                </td>
+                                <td><a th:href="'/erems/show-doc?id='+${e.id}" th:if="${e.examNum!=null&&e.examNum!=''}">下载准考证</a></td>
                             </tr>
                             </th:block>
                             </tbody>
@@ -68,6 +75,7 @@
                             <tr>
                                 <th>考试名称</th>
                                 <th>考试时间</th>
+                                <th>准考证号</th>
                                 <th>分数</th>
                                 <th>状态</th>
                             </tr>
@@ -77,6 +85,7 @@
                             <tr th:object="${e.exam}">
                                 <td th:text="*{name}">1</td>
                                 <td th:text="*{#dates.format(time, 'yyyy-MM-dd HH:mm')}">2018-5-4</td>
+                                <td th:text="${e.examNum}">100</td>
                                 <td th:text="${e.score}">100</td>
                                 <td>已考试</td>
                             </tr>

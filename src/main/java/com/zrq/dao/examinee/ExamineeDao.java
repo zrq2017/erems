@@ -131,6 +131,14 @@ public interface ExamineeDao{
     @ResultMap("userOnly")
     public List<MyExam> findMyExam();
 
+    /**
+     * 返回所有考生个人考试信息
+     * @return
+     */
+    @Select("select * from myexam where id=#{id}")
+    @ResultMap("user_exam")
+    public MyExam findMyexamById(Integer id);
+
     @Insert("insert user(username,password,phone,role) values(#{username},#{password},#{phone},2)")
     public Integer registUser(User user);
 

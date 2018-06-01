@@ -34,6 +34,10 @@ interceptor:
 #图片上传路径
 image:
   path: E:\Code\Java\erems\src\main\resources\static\img\
+#准考证模板路径
+admission:
+  path: E:\Code\Java\erems\src\main\resources\static\doc\admission.doc
+  per: E:\Code\Java\erems\src\main\resources\static\doc\per\
 ---
 #开发环境配置
 spring:
