@@ -10,6 +10,8 @@
     
     <!-- BOOTSTRAP STYLES-->
     <link href="/erems/res/assets/css/bootstrap.css" rel="stylesheet" />
+    <!--Time Picker-->
+    <link href="/erems/res/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
     <link href="/erems/res/assets/css/font-awesome.css" rel="stylesheet" />
     <!--CUSTOM BASIC STYLES-->
@@ -53,8 +55,12 @@
             <ul class="nav" id="main-menu">
                 <li>
                     <div class="user-img-div">
+                        <th:block th:if="${session.user.perimage!=null&&session.user.perimage!=''}">
+                        <img th:src="'/erems/show-image/'+${session.user.perimage}" class="img-thumbnail" />
+                        </th:block>
+                        <th:block th:unless="${session.user.perimage!=null&&session.user.perimage!=''}">
                         <img src="/erems/res/assets/img/user.png" class="img-thumbnail" />
-
+                        </th:block>
                         <div class="inner-text" th:object="${session.user}">
                             <span th:text="*{username}"></span>
                             <br />用户角色：

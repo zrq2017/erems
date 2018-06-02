@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <div th:replace="common/header::header('社会考试信息')"></div>
-<body>
+<body onload="getTime()">
 <div id="wrapper" class="row">
     <div th:replace="common/header::nav"></div>
     <div id="page-inner">
@@ -36,15 +36,15 @@
                                 <tr>
                                     <td>简介</td>
                                     <td>
-                                        <input type="text" id="description" name="description" class="required" placeholder="简介"
-                                               value="无" th:value="*{description}">
+                                        <textarea id="description" name="description" class="required" placeholder="简介" rows="5"
+                                                   th:text="*{description}"></textarea>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>考试时间</td>
                                     <td>
-                                        <input type="text" id="time" name="time" class="required" placeholder="考试时间"
-                                               value="无" th:value="*{#dates.format(time, 'yyyy-MM-dd HH:mm:ss')}">
+                                        <input type="text" th:value="*{#dates.format(time, 'yyyy-MM-dd HH:mm:ss')}" name="time"
+                                               class="required" placeholder="考试时间" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii:00" >
                                     </td>
                                 </tr>
                                 </tbody>
@@ -61,15 +61,15 @@
                                     <tr>
                                         <td>简介</td>
                                         <td>
-                                            <input type="text" id="description" name="description" class="required" placeholder="简介"
-                                                   value="">
+                                            <textarea id="description" name="description" class="required" placeholder="简介"
+                                                      value="" rows="5"></textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>考试时间</td>
                                         <td>
-                                            <input type="text" id="time" name="time" class="required" placeholder="格式:2018-5-1 10:00:00"
-                                                   value="" alt="格式:yyyy-MM-dd HH:mm:ss">
+                                            <input type="text"  name="time" class="required" placeholder="格式:2018-5-1 10:00:00"
+                                                   value="" id="datetimepicker" data-date-format="yyyy-mm-dd hh:ii:00" alt="格式:yyyy-MM-dd HH:mm:ss">
                                         </td>
                                     </tr>
                                     </tbody>
@@ -91,5 +91,8 @@
 <!-- /. WRAPPER  -->
 
 <div th:replace="common/footer"></div>
+<script>
+    $('#datetimepicker').datetimepicker();
+</script>
 </body>
 </html>

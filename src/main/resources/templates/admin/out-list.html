@@ -31,7 +31,7 @@
                             <tr th:object="${o}">
                                 <td th:text="${ostatus.count}">1</td>
                                 <td th:text="*{name}">考试名</td>
-                                <td th:text="*{description}">描述</td>
+                                <td th:text="*{#strings.substring(description,0,15)+'...'}">描述</td>
                                 <td th:text="*{#dates.format(time, 'yyyy-MM-dd HH:mm')}">时间</td>
                                 <td>
                                 <a th:href="'/erems/admin/cancelOuted?id='+*{id}">取消过期</a>
