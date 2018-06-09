@@ -86,7 +86,7 @@
                                     <td th:text="*{eduback}">教育背景</td>
                                     <td th:text="*{address.province+address.city}">地址</td>
                                     <td>
-                                        <button class="btn btn-primary"><a th:href="'/erems/manager/updateExaminee?id='+*{id}" style="color: white;">修改</a></button>
+                                        <a th:href="'/erems/manager/updateExaminee?id='+*{id}" class="btn btn-primary" style="color: white;">修改</a>
                                     </td>
                                 </tr>
                                 </th:block>

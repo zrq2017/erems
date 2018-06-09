@@ -119,7 +119,7 @@ public class AdminService {
          * 2.分地区编号图
          */
         for(MyExam m:e) {//循环遍历获得的某考试的考生记录，按地区划分考生为不同列表
-            Integer id=m.getAddress().getId();
+            Integer id=m.getUser().getAddress().getId();
             if(areaMap.containsKey(id)){
                 areaMap.get(id).add(m);
             }else {

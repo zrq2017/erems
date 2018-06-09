@@ -56,7 +56,7 @@ CREATE TABLE `exam` (
   `time` datetime DEFAULT NULL COMMENT '考试时间',
   `outed` tinyint(2) DEFAULT '0' COMMENT '过期标志，0未过期，1过期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +65,7 @@ CREATE TABLE `exam` (
 
 LOCK TABLES `exam` WRITE;
 /*!40000 ALTER TABLE `exam` DISABLE KEYS */;
-INSERT INTO `exam` VALUES (1,'四六级考试','高等教育社会考试','2018-06-19 09:00:00',0),(2,'公务员考试','公务员',NULL,0),(3,'中小学教师资格考试','中小学教师资格考试',NULL,0),(4,'非学历证书考试','非学历证书考试',NULL,0),(5,'全国计算机等级考试','全国计算机等级考试',NULL,0),(6,'专业技能课程考试','专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试','2018-05-19 09:00:00',1),(7,'专业英语四级考试','专业英语四级考试','2018-06-19 09:00:00',0),(8,'专业英语八级考试','专业英语八级考试','2018-06-19 15:00:00',0),(9,'音乐技能考试','音乐专业技能课程考试音乐专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试','2018-05-19 09:00:00',0);
+INSERT INTO `exam` VALUES (1,'四六级考试','高等教育考试','2018-06-20 09:00:00',0),(2,'公务员考试','公务员',NULL,0),(3,'中小学教师资格考试','中小学教师资格考试',NULL,0),(4,'非学历证书考试','非学历证书考试',NULL,0),(5,'全国计算机等级考试','全国计算机等级考试',NULL,0),(6,'专业技能课程考试','专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试','2018-05-19 09:00:00',1),(7,'专业英语四级考试','专业英语四级考试','2018-06-19 09:00:00',0),(8,'专业英语八级考试','专业英语八级考试','2018-06-19 15:00:00',0),(9,'音乐技能考试','音乐专业技能课程考试音乐专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试专业技能课程考试试','2018-05-19 09:00:00',0),(10,'xxx','xxx','2018-05-19 09:00:00',0);
 /*!40000 ALTER TABLE `exam` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +87,7 @@ CREATE TABLE `myexam` (
   `room_num` varchar(12) DEFAULT NULL COMMENT '考场号',
   `address` int(11) DEFAULT '0' COMMENT '考试地点',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `myexam` (
 
 LOCK TABLES `myexam` WRITE;
 /*!40000 ALTER TABLE `myexam` DISABLE KEYS */;
-INSERT INTO `myexam` VALUES (1,1,1,1,99,NULL,'0010010101','00100101',1),(2,1,2,1,99,NULL,NULL,NULL,1),(4,1,2,1,-1,NULL,'0010010102','00100101',1),(5,1,3,1,100,NULL,NULL,NULL,1),(8,1,2,0,-1,NULL,NULL,NULL,1),(10,1,3,1,-1,NULL,NULL,NULL,1),(11,2,1,1,-1,NULL,'0010010102','00100101',1),(12,10,2,1,-1,NULL,NULL,NULL,2),(13,11,1,1,-1,NULL,'0030010101','00300101',3),(14,2,2,1,-1,NULL,NULL,NULL,0),(15,2,3,1,-1,NULL,NULL,NULL,0),(16,2,4,1,-1,NULL,NULL,NULL,0);
+INSERT INTO `myexam` VALUES (1,1,1,1,99,NULL,'0010010101','00100101',1),(2,1,2,1,99,NULL,NULL,NULL,1),(4,1,2,1,-1,NULL,'0010010102','00100101',1),(5,1,3,1,100,NULL,NULL,NULL,1),(8,1,2,0,-1,NULL,NULL,NULL,1),(10,1,3,1,-1,NULL,NULL,NULL,1),(11,2,1,1,-1,NULL,'0010010102','00100101',1),(12,10,2,1,-1,NULL,NULL,NULL,2),(13,11,1,1,-1,NULL,'0030010101','00300101',3),(14,2,2,1,-1,NULL,NULL,NULL,0),(15,2,3,1,-1,NULL,NULL,NULL,0),(16,2,4,1,-1,NULL,NULL,NULL,0),(17,1,7,1,-1,NULL,NULL,NULL,0),(18,3,2,1,-1,NULL,NULL,NULL,0);
 /*!40000 ALTER TABLE `myexam` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +115,7 @@ CREATE TABLE `room` (
   `address_id` int(11) DEFAULT NULL COMMENT '归属区域',
   `detail` varchar(45) DEFAULT NULL COMMENT '详情',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +124,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (1,'001','南昌市第一中学',35,1,''),(2,'002','南昌市第二中学',40,1,''),(3,'003','南昌市第三中学',10,1,NULL),(4,'001','福州市第一中学',30,2,NULL),(5,'002','福州市第二中学',20,2,NULL),(6,'001','武汉市第一中学',15,3,NULL),(7,'002','武汉市第二中学',20,3,NULL);
+INSERT INTO `room` VALUES (1,'001','南昌市第一中学',35,1,''),(2,'002','南昌市第二中学',40,1,''),(3,'003','南昌市第三中学',10,1,NULL),(4,'001','福州市第一中学',30,2,NULL),(5,'002','福州市第二中学',20,2,NULL),(6,'001','武汉市第一中学',15,3,NULL),(7,'002','武汉市第二中学',20,3,NULL),(8,'003','xxx',20,3,'');
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,9 +146,10 @@ CREATE TABLE `user` (
   `address` int(11) DEFAULT '0' COMMENT '0，默认中国',
   `email` varchar(45) DEFAULT NULL COMMENT '邮箱',
   `phone` varchar(11) DEFAULT NULL,
+  `perimage` varchar(255) DEFAULT NULL COMMENT '存储照片名称',
   `role` smallint(6) DEFAULT '2' COMMENT '用户类型：0-管理员，1-老师，2-考生',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +158,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'test1','test1','test1','男','1','本科',1,'1@1.com','18700011122',2),(2,'test2','test2','test2','女','1','1',1,'1@1.com','1',2),(3,'test3','test3','test3','男','1','',1,'1@1.com','1',2),(4,'m1','m1','m1','女','','',1,'1@1.com','1222',1),(5,'admin','admin','admin','男','','',1,'1@1.com','',0),(6,'t1','t1','t1','女','','',2,'12xxxx3476@qq.com','1222',2),(7,'图','t2','t2','女','','',2,'12xxxx3476@qq.com','',2),(10,'t3','t3','t3','女','','',2,'1@1.com','',2),(11,'t4','t4','t4','男','','',3,'12xxxx3476@qq.com','',2);
+INSERT INTO `user` VALUES (1,'test1','test1','test1','男','1','本科',0,'1@1.com','18700011122','QQ图片20160719212506.png',2),(2,'test2','test2','test2','女','1','1',1,'1@1.com','1','QQ图片20170118234123.jpg',2),(3,'test3','test3','test3','男','0','',1,'1@1.com','1','QQ图片20160719212506.png',2),(4,'m1','m1','m1','女','222','',2,'1@1.com','1211',NULL,1),(5,'admin','admin','admin','男','','',2,'1@1.com','',NULL,0),(6,'t1','t1','t1','女','','',2,'12xxxx3476@qq.com','1222',NULL,2),(7,'图','t2','t2','女','','',2,'12xxxx3476@qq.com','',NULL,2),(10,'t3','t3','t3','女','','',2,'1@1.com','',NULL,2),(11,'t4','t4','t4','男','','',2,'12xxxx3476@qq.com','',NULL,2),(14,NULL,'lyh','lyh',NULL,NULL,NULL,0,NULL,'123',NULL,2),(15,NULL,'zrq','zrq',NULL,NULL,NULL,0,NULL,'123',NULL,2);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -170,4 +171,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-19 20:24:37
+-- Dump completed on 2018-06-08 18:28:28

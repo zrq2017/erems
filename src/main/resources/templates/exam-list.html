@@ -22,7 +22,8 @@
                         <th:block th:text="${exam.name}"></th:block>
                     </div>
                     <div class="panel-body">
-                        <p th:text="${exam.description}"></p>
+                        <p th:if="${#strings.length(exam.description)>20}" th:text="${#strings.substring(exam.description,0,20)+'...'}"></p>
+                        <p th:unless="${#strings.length(exam.description)>20}" th:text="${exam.description}"></p>
                     </div>
                     <div class="panel-footer">
                         <a th:href="'/erems/exam/signup?id='+${exam.id}">点击参与报名</a>
