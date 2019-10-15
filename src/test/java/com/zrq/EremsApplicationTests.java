@@ -15,8 +15,8 @@ public class EremsApplicationTests {
 	private AdminService adminService;
 	@Test
 	public void contextLoads() {
-		int i=adminService.batchCreateExamNum(1);
-		System.out.println("test:"+i);
+//		int i=adminService.batchCreateExamNum(1);
+//		System.out.println("test:"+i);
 //		System.out.println("changeString:"+ StringUtil.changeToString(100));
 	}
 
